@@ -1,0 +1,20 @@
+{
+    "name": "front-moniter",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack",
+        "dev": "webpack-dev-server --open --hot"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "html-webpack-plugin": "^4.5.0",
+        "user-agent": "^1.0.4",
+        "webpack": "^4.44.2",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0"
+    }
+}

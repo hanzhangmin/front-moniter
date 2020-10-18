@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端监控sdk</title>
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+</head>
+
+<body>
+    <div id="container">
+        <div class="content">
+            <button onclick="errorClick()">点击抛出错误</button>
+            <button onclick="promiseErrorClick()">点击抛出错误</button>
+            <button onclick="successRequest()">成功的请求</button>
+            <button onclick="errorRequest()">失败的请求</button>
+            <button onclick="fetchTest()">fetch成功</button>
+            <button onclick="fetchTestError()">fetch失败</button>
+        </div>
+
+        <div id="amin" style="height: 100vh;"></div>
+    </div>
+    <script>
+        setTimeout(() => {
+            let content = document.getElementsByClassName('content')[0];
+            let h1 = document.createElement('h1');
+            h1.innerHTML = "我是有意义的元素";
+            h1.setAttribute("elementtiming", "meaningful");
+            content.appendChild(h1);
+        }, 2000);
+
+        function errorClick() {
+            let start = Date.now();
+            while (Date.now() - start < 1000) {
+
+            }
+            window.someVar.error = "error";
+        }
+
+        function promiseErrorClick() {
+            new Promise((resolve, reject) => {
+                window.someVar.error = "error";
+                // reject();
+            }).then(res => {
+                console.log(res);
+            })
+        }
+
+        function successRequest() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', '/success', true);
+            xhr.responseType = "json";
+            xhr.onload = function() {
+                console.log(xhr.response);
+            }
+            xhr.send();
+        }
+
+        function errorRequest() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('post', '/error', true);
+            xhr.responseType = "json";
+            xhr.onload = function() {
+                console.log(xhr.response);
+            }
+            xhr.onerror = function(err) {
+                console.log(err);
+            }
+            xhr.send();
+        }
+
+        function fetchTest() {
+            // console.log(window.fetch);
+            fetch('/fetchTest')
+                .then(res => {
+                    console.log(res);
+                }, err => {
+                    console.log(err);
+                })
+        }
+
+        function fetchTestError() {
+            fetch('fetchTestError')
+                .then(res => {
+                    console.log(res);
+                }, err => {
+                    console.log(err);
+                })
+        }
+    </script>
+    <!-- <script src="./error.js"></script> -->
+</body>
+
+</html>

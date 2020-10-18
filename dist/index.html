@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端监控sdk</title>
+    <link rel="stylesheet" href="./style.css">
+<script src="moniter.js"></script></head>
+
+<body>
+    <div id="container">
+        <div class="content">
+            <button onclick="errorClick()">点击抛出错误</button>
+            <button onclick="promiseErrorClick()">点击抛出错误</button>
+        </div>
+    </div>
+    <script>
+        function errorClick() {
+            window.someVar.error = "error";
+        }
+
+        function promiseErrorClick() {
+            new Promise((resolve, reject) => {
+                window.someVar.error = "error";
+                // reject();
+            }).then(res => {
+                console.log(res);
+            })
+        }
+    </script>
+    <script src="./error.js"></script>
+</body>
+
+</html>
